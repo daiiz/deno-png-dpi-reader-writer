@@ -10,6 +10,11 @@ Detect width, height and DPI for PNG image.
 const {width, height, dpi} = await parsePngFormat(buf)
 ```
 
+Write DPI for PNG image.
+```ts
+const ui8 = await writePngDpi(buf, dpi)
+```
+
 ## Examples
 ### Reader
 ```
@@ -23,7 +28,6 @@ Result:
 ```
 
 ### Writer
-Write DPI for PNG image.
 ```
 $ deno ./examples/writer.ts ./examples/non-retina/button.png 72 > a.png
 ```
