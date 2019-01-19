@@ -15,9 +15,9 @@ function bytes (num, byteLength): Array<number> {
 async function getInsertPosition(buf: Buffer): Promise<number> {
   const _buf = new Buffer(buf.bytes())
   const {dpi} = await parsePngFormat(_buf)
-  // pHYsが存在する。上書きしない。
+  // 既存のpHYsを上書きしない
   if (dpi !== undefined) return -1
-  // すべて既読、つまり、"IDAT"が存在しない。
+  // すべて既読、つまり、"IDAT"が存在しない
   if (_buf.empty()) return -1
   // 既読bytes数
   const readBytesNum = _buf.capacity - _buf.length
