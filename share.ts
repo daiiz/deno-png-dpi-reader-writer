@@ -18,14 +18,13 @@ export async function isPng (buf: Buffer): Promise<boolean> {
 }
 
 export async function readIHDR (buf: Buffer): Promise<ImageInfo> {
-  let _
   // https://tools.ietf.org/html/rfc2083#page-15
   // Length, ChunkType
-  _ = new Uint8Array(4 + 4); await buf.read(_)
+  await skip(buf, 4 + 4)
   const width = new Uint8Array(4); await buf.read(width)
   const height = new Uint8Array(4); await buf.read(height)
   // Bit depth, Color type, Compression method, Filter method, nterlace method, CRC
-  _ = new Uint8Array(1 + 1 + 1 + 1 + 1 + 4); await buf.read(_)
+  await skip(buf, 1 + 1 + 1 + 1 + 1 + 4)
   return {
     width: toDec(width),
     height: toDec(height)
@@ -34,4 +33,9 @@ export async function readIHDR (buf: Buffer): Promise<ImageInfo> {
 
 export function getCharCodes (raw: string): string {
   return raw.split('').map(c => c.charCodeAt(0)).join(' ')
+}
+
+export async function skip (buf: Buffer, bytes: number) {
+  const _ = new Uint8Array(bytes);
+  await buf.read(_)
 }
