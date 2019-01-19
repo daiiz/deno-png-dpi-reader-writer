@@ -1,15 +1,21 @@
-export const toBin = (value, digits): string => {
-  return value.toString(2).padStart(digits, '0')
+import {Buffer} from 'deno'
+
+export const toDec = (arr: Uint8Array): number => {
+  const _toBin = (value, bits) => {
+    return value.toString(2).padStart(bits, '0')
+  }
+  return parseInt(Array.from(arr).map(v => _toBin(v, 8)).join(''), 2)
 }
 
-export const toHex = (value, digits): string => {
-  return value.toString(16).padStart(digits, '0')
-}
+// export const toHex = (value, digits) => {
+//   console.log(value)
+//   return value.toString(16).padStart(digits, '0')
+// }
 
-export function isPng (byteArray, ptr): boolean {
-  const pngSignature = '89 50 4E 47 0D 0A 1A 0A'
-  const signature = readBytes(byteArray, ptr, 8).map(v => toHex(v, 2))
-  return signature.join(' ').toUpperCase() === pngSignature
+export async function isPng (buf: Buffer): Promise<boolean> {
+  const pngSignature = '137 80 78 71 13 10 26 10'
+  const p = new Uint8Array(8); await buf.read(p)
+  return p.join(' ').toUpperCase() === pngSignature
 }
 
 export function readBytes (byteArray, ptr, byteLength): Array<number> {
@@ -19,19 +25,21 @@ export function readBytes (byteArray, ptr, byteLength): Array<number> {
   return Array.from(res)
 }
 
-export function readIHDR (byteArray, ptr) {
+export async function readIHDR(buf) {
+  let _
   // https://tools.ietf.org/html/rfc2083#page-15
   // Length, ChunkType
-  ptr.pos += (4 + 4)
-  const _width = readBytes(byteArray, ptr, 4).map(v => toBin(v, 8))
-  const width = parseInt(_width.join(''), 2)
-  const _height = readBytes(byteArray, ptr, 4).map(v => toBin(v, 8))
-  const height = parseInt(_height.join(''), 2)
+  _ = new Uint8Array(4 + 4); await buf.read(_)
+  const width = new Uint8Array(4); await buf.read(width)
+  const height = new Uint8Array(4); await buf.read(height)
   // Bit depth, Color type, Compression method, Filter method, nterlace method, CRC
-  ptr.pos += (1 + 1 + 1 + 1 + 1 + 4)
-  return {width, height}
+  _ = new Uint8Array(1 + 1 + 1 + 1 + 1 + 4); await buf.read(_)
+  return {
+    width: toDec(width),
+    height: toDec(height)
+  }
 }
 
-export function getCharCodes (str) {
-  return str.split('').map(c => c.charCodeAt(0)).join(' ')
+export function getCharCodes (raw: string): string {
+  return raw.split('').map(c => c.charCodeAt(0)).join(' ')
 }

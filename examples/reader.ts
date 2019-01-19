@@ -15,11 +15,11 @@ const main = async () => {
 
   const srcUrl = args[1]
   let buf: Buffer
-  if () {
+  // if () {
 
-  }
+  // }
   buf = await loadImage('./examples/retina/button.png')
-  console.log(parsePngFormat(buf))
+  console.log(await parsePngFormat(buf))
 }
 
 main()
