@@ -1,7 +1,7 @@
 # deno-png-dpi-reader
 
 A Reader for png image's pHYs chunk. \
-An implementation of a part of [png-dpi-reader-writer](https://github.com/daiiz/png-dpi-reader-writer) for deno.
+An implementation of a part of [png-dpi-reader-writer](https://github.com/daiiz/png-dpi-reader-writer) for [deno](https://github.com/denoland/deno).
 
 ## Usage
 Detect width, height and DPI for PNG image.
