@@ -13,7 +13,7 @@ const {width, height, dpi} = await parsePngFormat(buf)
 ## Examples
 ### Reader
 ```
-$ deno examples/reader.ts ./examples/retina/7127a0c2a987ea50dbba0ebd6455c206.png
+$ deno ./examples/reader.ts ./examples/retina/7127a0c2a987ea50dbba0ebd6455c206.png
 $ deno https://denopkg.com/daiiz/deno-png-dpi-reader/examples/reader.ts --allow-net https://i.gyazo.com/7127a0c2a987ea50dbba0ebd6455c206.png
 ```
 
