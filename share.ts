@@ -1,16 +1,15 @@
 import {Buffer} from 'deno'
 
-export const toDec = (arr: Uint8Array): number => {
-  const _toBin = (value, bits) => {
-    return value.toString(2).padStart(bits, '0')
-  }
-  return parseInt(Array.from(arr).map(v => _toBin(v, 8)).join(''), 2)
+export interface ImageInfo {
+  width?: number,
+  height?: number,
+  dpi?: number
 }
 
-// export const toHex = (value, digits) => {
-//   console.log(value)
-//   return value.toString(16).padStart(digits, '0')
-// }
+export const toDec = (arr: Uint8Array): number => {
+  const _toBin = (value, bits) => value.toString(2).padStart(bits, '0')
+  return parseInt(Array.from(arr).map(v => _toBin(v, 8)).join(''), 2)
+}
 
 export async function isPng (buf: Buffer): Promise<boolean> {
   const pngSignature = '137 80 78 71 13 10 26 10'
@@ -18,14 +17,7 @@ export async function isPng (buf: Buffer): Promise<boolean> {
   return p.join(' ').toUpperCase() === pngSignature
 }
 
-export function readBytes (byteArray, ptr, byteLength): Array<number> {
-  const {pos} = ptr
-  const res = byteArray.slice(pos, pos + byteLength)
-  ptr.pos += byteLength
-  return Array.from(res)
-}
-
-export async function readIHDR(buf) {
+export async function readIHDR (buf: Buffer): Promise<ImageInfo> {
   let _
   // https://tools.ietf.org/html/rfc2083#page-15
   // Length, ChunkType
