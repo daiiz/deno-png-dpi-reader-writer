@@ -1,6 +1,5 @@
 import {Buffer} from 'deno'
 import {crc} from './crc32.ts'
-import {toDec, getCharCodes, isPng, readIHDR} from './share.ts'
 import {parsePngFormat} from './reader.ts'
 
 // Number of pixels per unit when DPI is 72
@@ -19,9 +18,7 @@ async function getInsertPosition(buf: Buffer): Promise<number> {
   // pHYsが存在する。上書きしない。
   if (dpi !== undefined) return -1
   // すべて既読、つまり、"IDAT"が存在しない。
-  if (_buf.empty()) {
-    return -1
-  }
+  if (_buf.empty()) return -1
   // 既読bytes数
   const readBytesNum = _buf.capacity - _buf.length
   // chunkLengthと"IDAT"ぶんだけ戻した位置
@@ -30,7 +27,6 @@ async function getInsertPosition(buf: Buffer): Promise<number> {
 
 function makeChunkPhys (dpi: number): Uint8Array {
   const type = 'pHYs'.split('').map(c => c.charCodeAt(0))
-  // console.log('##', type)
   const devicePixelRatio = dpi / 72
   const pixelsPerMeter = Math.floor(PX_PER_METER * devicePixelRatio)
   const data = [

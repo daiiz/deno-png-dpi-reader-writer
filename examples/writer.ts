@@ -1,5 +1,5 @@
 import {args, Buffer, stdout} from 'deno'
-import {loadLocalImage} from './share.ts'
+import {loadLocalImage, fetchImage} from './share.ts'
 import {writePngDpi} from '../mod.ts'
 
 const main = async () => {
@@ -13,7 +13,7 @@ const main = async () => {
   if (!/https?:\/\//.test(srcUrl)) {
     buf = await loadLocalImage(srcUrl)
   } else {
-    // buf = await fetchImage(srcUrl)
+    buf = await fetchImage(srcUrl)
   }
 
   const arr: Uint8Array = await writePngDpi(buf, dpi)
