@@ -1,5 +1,5 @@
-import {loadLocalImage, fetchImage} from './share.ts'
-import {parsePngFormat} from '../mod.ts'
+import { loadLocalImage, fetchImage } from './share.ts'
+import { parsePngFormat } from '../mod.ts'
 const { args } = Deno
 
 const main = async () => {
@@ -16,4 +16,3 @@ const main = async () => {
 }
 
 main()
-

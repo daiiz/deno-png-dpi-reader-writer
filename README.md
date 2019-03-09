@@ -7,12 +7,12 @@ A [deno](https://github.com/denoland/deno) port of [png-dpi-reader-writer](https
 Detect width, height and DPI for PNG image.
 ```ts
 // buf: deno/Buffer
-const {width, height, dpi} = await parsePngFormat(buf)
+const { width, height, dpi } = await parsePngFormat(buf)
 ```
 
 Write DPI for PNG image.
 ```ts
-const ui8 = await writePngDpi(buf, dpi)
+const ui8arr = await writePngDpi(buf, dpi)
 ```
 
 ## Examples

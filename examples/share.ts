@@ -5,7 +5,7 @@ export const loadLocalImage = async (srcPath): Promise<Deno.Buffer> => {
   // https://github.com/denoland/deno/blob/master/js/buffer.ts
   const buf = new Buffer()
   await copy(buf, imgFile)
-  return buf // Buffer {off: 0, buf: []}
+  return buf // Buffer { off: 0, buf: [] }
 }
 
 export const fetchImage = async (srcUrl): Promise<Deno.Buffer> => {

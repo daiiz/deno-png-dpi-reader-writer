@@ -1,6 +1,6 @@
-import {loadLocalImage, fetchImage} from './share.ts'
-import {writePngDpi} from '../mod.ts'
-const { args, Buffer, stdout } = Deno
+import { loadLocalImage, fetchImage } from './share.ts'
+import { writePngDpi } from '../mod.ts'
+const { args, stdout } = Deno
 
 const main = async () => {
   if (!args[1]) throw new Error('image url is required.')

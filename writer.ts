@@ -1,5 +1,5 @@
-import {crc} from './crc32.ts'
-import {parsePngFormat} from './reader.ts'
+import { crc } from './crc32.ts'
+import { parsePngFormat } from './reader.ts'
 const { Buffer } = Deno
 
 // Number of pixels per unit when DPI is 72
@@ -14,7 +14,7 @@ function bytes (num, byteLength): Array<number> {
 
 async function getInsertPosition(buf: Deno.Buffer): Promise<number> {
   const _buf = new Buffer(buf.bytes())
-  const {dpi} = await parsePngFormat(_buf)
+  const { dpi } = await parsePngFormat(_buf)
   // 既存のpHYsを上書きしない
   if (dpi !== undefined) return -1
   // すべて既読、つまり、"IDAT"が存在しない
