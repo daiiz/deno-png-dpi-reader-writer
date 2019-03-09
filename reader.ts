@@ -1,11 +1,11 @@
-import {Buffer} from 'deno'
 import {isPng, toDec, readIHDR, getCharCodes, ImageInfo} from './share.ts'
+const { Buffer } = Deno
 
-export async function parsePngFormat (buf: Buffer): Promise<ImageInfo> {
+export async function parsePngFormat(buf: Deno.Buffer): Promise<ImageInfo> {
   return readChunks(buf)
 }
 
-const readpHYs = async (buf: Buffer): Promise<number> => {
+const readpHYs = async (buf: Deno.Buffer): Promise<number> => {
   let p
   // https://tools.ietf.org/html/rfc2083#page-22
   p = new Uint8Array(4); await buf.read(p)
@@ -23,7 +23,7 @@ const readpHYs = async (buf: Buffer): Promise<number> => {
   return dpi
 }
 
-const readChunks = async (buf: Buffer): Promise<ImageInfo> => {
+const readChunks = async (buf: Deno.Buffer): Promise<ImageInfo> => {
   let info: ImageInfo = {}
   if (!await isPng(buf)) return info
   const {width, height} = await readIHDR(buf)

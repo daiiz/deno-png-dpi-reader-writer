@@ -1,4 +1,4 @@
-import {Buffer} from 'deno'
+const { Buffer } = Deno
 
 export interface ImageInfo {
   width?: number,
@@ -11,13 +11,13 @@ export const toDec = (arr: Uint8Array): number => {
   return parseInt(Array.from(arr).map(v => _toBin(v, 8)).join(''), 2)
 }
 
-export async function isPng (buf: Buffer): Promise<boolean> {
+export async function isPng (buf: Deno.Buffer): Promise<boolean> {
   const pngSignature = '137 80 78 71 13 10 26 10'
   const p = new Uint8Array(8); await buf.read(p)
   return p.join(' ').toUpperCase() === pngSignature
 }
 
-export async function readIHDR (buf: Buffer): Promise<ImageInfo> {
+export async function readIHDR (buf: Deno.Buffer): Promise<ImageInfo> {
   // https://tools.ietf.org/html/rfc2083#page-15
   // Length, ChunkType
   await skip(buf, 4 + 4)
@@ -35,7 +35,7 @@ export function getCharCodes (raw: string): string {
   return raw.split('').map(c => c.charCodeAt(0)).join(' ')
 }
 
-export async function skip (buf: Buffer, bytes: number) {
+export async function skip (buf: Deno.Buffer, bytes: number) {
   const _ = new Uint8Array(bytes);
   await buf.read(_)
 }

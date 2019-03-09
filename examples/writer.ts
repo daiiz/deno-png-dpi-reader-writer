@@ -1,6 +1,6 @@
-import {args, Buffer, stdout} from 'deno'
 import {loadLocalImage, fetchImage} from './share.ts'
 import {writePngDpi} from '../mod.ts'
+const { args, Buffer, stdout } = Deno
 
 const main = async () => {
   if (!args[1]) throw new Error('image url is required.')
@@ -9,7 +9,7 @@ const main = async () => {
   const srcUrl = args[1]
   const dpi = +args[2]
 
-  let buf: Buffer
+  let buf: Deno.Buffer
   if (!/https?:\/\//.test(srcUrl)) {
     buf = await loadLocalImage(srcUrl)
   } else {

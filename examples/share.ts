@@ -1,6 +1,6 @@
-import {open, copy, Buffer} from 'deno'
+const { open, copy, Buffer } = Deno
 
-export const loadLocalImage = async (srcPath): Promise<Buffer> => {
+export const loadLocalImage = async (srcPath): Promise<Deno.Buffer> => {
   const imgFile = await open(srcPath)
   // https://github.com/denoland/deno/blob/master/js/buffer.ts
   const buf = new Buffer()
@@ -8,7 +8,7 @@ export const loadLocalImage = async (srcPath): Promise<Buffer> => {
   return buf // Buffer {off: 0, buf: []}
 }
 
-export const fetchImage = async (srcUrl): Promise<Buffer> => {
+export const fetchImage = async (srcUrl): Promise<Deno.Buffer> => {
   // https://github.com/denoland/deno/blob/master/js/fetch.ts
   const res = await fetch(srcUrl)
   const buf = new Buffer(await res.arrayBuffer())
