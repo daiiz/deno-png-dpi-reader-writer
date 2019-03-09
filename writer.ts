@@ -1,6 +1,6 @@
-import {Buffer} from 'deno'
-import {crc} from './crc32.ts'
-import {parsePngFormat} from './reader.ts'
+import { crc } from './crc32.ts'
+import { parsePngFormat } from './reader.ts'
+const { Buffer } = Deno
 
 // Number of pixels per unit when DPI is 72
 // Number of pixels per unit when devicePixelRatio is 1
@@ -12,9 +12,9 @@ function bytes (num, byteLength): Array<number> {
   return binArr.map(v => parseInt(v, 2))
 }
 
-async function getInsertPosition(buf: Buffer): Promise<number> {
+async function getInsertPosition(buf: Deno.Buffer): Promise<number> {
   const _buf = new Buffer(buf.bytes())
-  const {dpi} = await parsePngFormat(_buf)
+  const { dpi } = await parsePngFormat(_buf)
   // 既存のpHYsを上書きしない
   if (dpi !== undefined) return -1
   // すべて既読、つまり、"IDAT"が存在しない
@@ -43,7 +43,7 @@ function makeChunkPhys (dpi: number): Uint8Array {
   return new Uint8Array(pHYsChunk)
 }
 
-export async function writePngDpi(src: Buffer, dpi: number): Promise<Uint8Array> {
+export async function writePngDpi(src: Deno.Buffer, dpi: number): Promise<Uint8Array> {
   const insertPosition = await getInsertPosition(src)
   if (insertPosition < 0) return src.bytes()
 
