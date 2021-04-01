@@ -1,10 +1,8 @@
-const { open, copy, Buffer } = Deno
+const { readFile, Buffer } = Deno
 
 export const loadLocalImage = async (srcPath: string): Promise<Deno.Buffer> => {
-  const imgFile = await open(srcPath)
-  // https://github.com/denoland/deno/blob/master/js/buffer.ts
-  const buf = new Buffer()
-  await copy(buf, imgFile)
+  const imgFile = await readFile(srcPath)
+  const buf = new Buffer(imgFile)
   return buf // Buffer { off: 0, buf: [] }
 }
 
