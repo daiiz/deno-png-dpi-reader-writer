@@ -36,7 +36,7 @@ const crcTable = [
 ]
 
 /* Update a running CRC with the bytes buf[0..len-1] */
-function updateCrc (crc, buf, len) {
+function updateCrc (crc: number, buf: number[], len: number) {
   for (let n = 0; n < len; n++) {
     crc = (crc >>> 8) ^ crcTable[(crc ^ buf[n]) & 0xff]
   }
@@ -44,6 +44,6 @@ function updateCrc (crc, buf, len) {
 }
 
 /* Return the CRC of the bytes buf[0..len-1]. */
-export function crc (buf) {
+export function crc (buf: number[]) {
   return (updateCrc(-1, buf, buf.length) ^ -1) >>> 0 // u32
 }

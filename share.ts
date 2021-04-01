@@ -7,7 +7,7 @@ export interface ImageInfo {
 }
 
 export const toDec = (arr: Uint8Array): number => {
-  const _toBin = (value, bits) => value.toString(2).padStart(bits, '0')
+  const _toBin = (value: number, bits: number) => value.toString(2).padStart(bits, '0')
   return parseInt(Array.from(arr).map(v => _toBin(v, 8)).join(''), 2)
 }
 

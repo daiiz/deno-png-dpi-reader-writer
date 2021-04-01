@@ -6,10 +6,10 @@ const { Buffer } = Deno
 // Number of pixels per unit when devicePixelRatio is 1
 const PX_PER_METER = 2835
 
-function bytes (num, byteLength): Array<number> {
+function bytes (num: number, byteLength: number): number[] {
   const binStr = num.toString(2).padStart(byteLength * 8, '0')
   const binArr = binStr.match(/\d{8}/g)
-  return binArr.map(v => parseInt(v, 2))
+  return binArr!.map((v: string) => parseInt(v, 2))
 }
 
 async function getInsertPosition(buf: Deno.Buffer): Promise<number> {
