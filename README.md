@@ -19,7 +19,7 @@ const ui8arr = await writePngDpi(buf, dpi)
 ### Reader
 ```
 $ deno run --allow-read ./examples/reader.ts ./examples/retina/7127a0c2a987ea50dbba0ebd6455c206.png
-$ deno run --allow-net https://denopkg.com/daiiz/deno-png-dpi-reader/examples/reader.ts https://i.gyazo.com/7127a0c2a987ea50dbba0ebd6455c206.png
+$ deno run --allow-net https://raw.githubusercontent.com/daiiz/deno-png-dpi-reader-writer/master/examples/reader.ts https://i.gyazo.com/7127a0c2a987ea50dbba0ebd6455c206.png
 ```
 
 Result:
