@@ -3,11 +3,11 @@ import { writePngDpi } from '../mod.ts'
 const { args, stdout } = Deno
 
 const main = async () => {
-  if (!args[1]) throw new Error('image url is required.')
-  if (!args[2]) throw new Error('dpi is required.')
+  if (!args[0]) throw new Error('image url is required.')
+  if (!args[1]) throw new Error('dpi is required.')
 
-  const srcUrl = args[1]
-  const dpi = +args[2]
+  const srcUrl = args[0]
+  const dpi = +args[1]
 
   let buf: Deno.Buffer
   if (!/https?:\/\//.test(srcUrl)) {
