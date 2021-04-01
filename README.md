@@ -18,8 +18,8 @@ const ui8arr = await writePngDpi(buf, dpi)
 ## Examples
 ### Reader
 ```
-$ deno ./examples/reader.ts --allow-read ./examples/retina/7127a0c2a987ea50dbba0ebd6455c206.png
-$ deno https://denopkg.com/daiiz/deno-png-dpi-reader/examples/reader.ts --allow-net https://i.gyazo.com/7127a0c2a987ea50dbba0ebd6455c206.png
+$ deno run --allow-read ./examples/reader.ts ./examples/retina/7127a0c2a987ea50dbba0ebd6455c206.png
+$ deno run --allow-net https://denopkg.com/daiiz/deno-png-dpi-reader/examples/reader.ts https://i.gyazo.com/7127a0c2a987ea50dbba0ebd6455c206.png
 ```
 
 Result:
@@ -29,5 +29,5 @@ Result:
 
 ### Writer
 ```
-$ deno ./examples/writer.ts --allow-read ./examples/non-retina/8d132d64902c1323ffa8ca688b2c40eb.png 72 > a.png
+$ deno run --allow-read ./examples/writer.ts ./examples/non-retina/8d132d64902c1323ffa8ca688b2c40eb.png 72 > a.png
 ```
