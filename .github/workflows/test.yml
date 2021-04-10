@@ -10,3 +10,4 @@ jobs:
       - name: Setup Deno
         uses: denolib/setup-deno@v2.3.0
       - run: deno --version
+      - run: deno test --allow-read --allow-net
