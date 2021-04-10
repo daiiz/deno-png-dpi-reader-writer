@@ -24,7 +24,7 @@ Deno.test('writePngDpi: DPI should not be overwritten.', async () => {
   assertEquals(dpi, raw.dpi)
 })
 
-Deno.test('writePngDpi: DPI write to chunk should be successful', async () => {
+Deno.test('writePngDpi: DPI write to chunk should be successful.', async () => {
   const srcImagePath = imagePaths.nonRetina
   const rawBuf: Deno.Buffer = await loadLocalImage(srcImagePath)
   const raw = await parsePngFormat(rawBuf)
