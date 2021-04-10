@@ -1,4 +1,5 @@
-import { isPng, toDec, readIHDR, getCharCodes, ImageInfo } from './share.ts'
+import { isPng, readIHDR } from './share.ts'
+import { ImageInfo, toDec, getCharCodes } from './share_.ts'
 
 export async function parsePngFormat(buf: Deno.Buffer): Promise<ImageInfo> {
   return readChunks(buf)
@@ -23,8 +24,9 @@ const readpHYs = async (buf: Deno.Buffer): Promise<number> => {
 }
 
 const readChunks = async (buf: Deno.Buffer): Promise<ImageInfo> => {
-  let info: ImageInfo = {}
+  const info: ImageInfo = {}
   if (!await isPng(buf)) return info
+
   const { width, height } = await readIHDR(buf)
   info.width = width
   info.height = height
