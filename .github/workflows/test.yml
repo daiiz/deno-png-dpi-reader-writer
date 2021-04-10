@@ -1,0 +1,13 @@
+name: test
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup Deno
+        uses: denolib/setup-deno@v2.3.0
+      - run: deno --version
+      - run: deno test --allow-read --allow-net
