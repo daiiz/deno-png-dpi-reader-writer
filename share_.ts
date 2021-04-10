@@ -12,10 +12,6 @@ const toHex = (value: number, digits: number) => value.toString(16).padStart(dig
 
 export const toBin = (value: number, digits: number) => value.toString(2).padStart(digits, '0')
 
-export const toDec = (arr: Uint8Array): number => {
-  return parseInt(Array.from(arr).map(v => toBin(v, 8)).join(''), 2)
-}
-
 export function getCharCodes (raw: string): string {
   return raw.split('').map(c => c.charCodeAt(0)).join(' ')
 }
@@ -30,7 +26,12 @@ export function readBytes (byteArray: Uint8Array, ptr: PositionRef, byteLength: 
   const { pos } = ptr
   const res = byteArray.slice(pos, pos + byteLength)
   ptr.pos += byteLength
-  return Array.from(res)
+  const arr: Uint8Array = new Uint8Array(res)
+  const bytes: number[] = []
+  for (const v of arr) {
+    bytes.push(v)
+  }
+  return bytes
 }
 
 export function readIHDR (byteArray: Uint8Array, ptr: PositionRef) {
