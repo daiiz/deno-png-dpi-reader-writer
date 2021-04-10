@@ -1,15 +1,5 @@
 const { Buffer } = Deno
-
-export interface ImageInfo {
-  width?: number,
-  height?: number,
-  dpi?: number
-}
-
-export const toDec = (arr: Uint8Array): number => {
-  const _toBin = (value: number, bits: number) => value.toString(2).padStart(bits, '0')
-  return parseInt(Array.from(arr).map(v => _toBin(v, 8)).join(''), 2)
-}
+import { ImageInfo, toDec } from './share_.ts'
 
 export async function isPng (buf: Deno.Buffer): Promise<boolean> {
   const pngSignature = '137 80 78 71 13 10 26 10'
@@ -29,10 +19,6 @@ export async function readIHDR (buf: Deno.Buffer): Promise<ImageInfo> {
     width: toDec(width),
     height: toDec(height)
   }
-}
-
-export function getCharCodes (raw: string): string {
-  return raw.split('').map(c => c.charCodeAt(0)).join(' ')
 }
 
 export async function skip (buf: Deno.Buffer, bytes: number) {
