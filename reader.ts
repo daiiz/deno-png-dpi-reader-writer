@@ -1,5 +1,5 @@
-import { isPng, readIHDR } from './share.ts'
-import { ImageInfo, toDec, getCharCodes } from './share_.ts'
+import { isPng, readIHDR, toDec } from './share.ts'
+import { ImageInfo, getCharCodes } from './share_.ts'
 
 export async function parsePngFormat(buf: Deno.Buffer): Promise<ImageInfo> {
   return readChunks(buf)

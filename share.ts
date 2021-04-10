@@ -1,5 +1,10 @@
 const { Buffer } = Deno
-import { ImageInfo, toDec } from './share_.ts'
+import { ImageInfo } from './share_.ts'
+
+export const toDec = (arr: Uint8Array): number => {
+  const _toBin = (value: number, bits: number) => value.toString(2).padStart(bits, '0')
+  return parseInt(Array.from(arr).map(v => _toBin(v, 8)).join(''), 2)
+}
 
 export async function isPng (buf: Deno.Buffer): Promise<boolean> {
   const pngSignature = '137 80 78 71 13 10 26 10'
