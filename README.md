@@ -31,3 +31,10 @@ Result:
 ```
 $ deno run --allow-read ./examples/writer.ts ./examples/non-retina/8d132d64902c1323ffa8ca688b2c40eb.png 72 > a.png
 ```
+
+
+## Tests
+
+```
+$ deno test --allow-read
+```
